@@ -1,49 +1,81 @@
 # nluug-2016-minimesos
 
+## Contents
+
 Slides and demo for the [minimesos talk at the NLUUG 2016 Fall Conference](https://www.nluug.nl/activiteiten/events/nj16/abstracts/ab11.html)
 
+## Demo
+
+### The environment
+
+Show that no containers are running
+
 ```
-$ minimesos up
+docker ps
 ```
 
-Check out the *Frameworks* tab. Elasticsearch should be running. From here you can check out the tasks and scale up or down.
+### Starting the cluster
 
 ```
-$ docker ps
-$ cat minimesosFile
-$ cat es.json
-$ minimesos up
+$ minimesos --debug up
 ```
 
-Check out the master UI
-Click frameworks tab
+* Check the state
 
 ```
 $ minimesos state | less
 ```
 
-Find executor IP and port
+* Check the processes
+
+```
+$ minimesos ps
+```
+
+### Exploring the master UI
+
+* Check out the running tasks: Elasticsearch and Weave Scope.
+* Check out the resources.
+
+### Exploring Mesos Elasticsearch
+
+* Check out the *Frameworks* tab. Elasticsearch should be running. From here you can check out the tasks.
+* Check the 'tasks' menu.
+* Check the Elasticsearch endpoint.
+* Index a tweet.
 
 ```
 $ curl -XPUT -d@tweet.json IP:PORT/twitter/tweet/1
 ```
 
-Go to the UI
-Perform a search
-Scale up
-Perform a search again
-Check out the `_nodes` endpoint
+* Perform a search.
+* Scale up.
+* Show the `_nodes` endpoint.
+
+### Exploring the Mesos Elasticsearch Sandbox 
+
+* Show the downloaded files and logs
+
+### Exploring Weave Scope
+
+* Go to `http://localhost:4000`
+
+### Exploring the minimesos files
 
 ```
+$ cat minimesosFile
+$ cat es.json
 $ cd .minimesos
 ```
 
-Check the contents of the `sandboxes-*` folders
+### Destroying the cluster
 
 ```
 $ minimesos destroy
-$ docker ps
 ```
 
+* Show that everything is cleaned up
 
-
+```
+$ docker ps
+```
